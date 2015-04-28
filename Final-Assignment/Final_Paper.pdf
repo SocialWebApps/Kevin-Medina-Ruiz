@@ -1,0 +1,168 @@
+
+COT 6930: Web 2.0
+
+Open Data Initiative
+
+Kevin A. Medina Ruiz
+
+ 
+ABSTRACT:
+	As part of the “Open Government Initiative” started in 2009 the government began to publish data from all fourteen different topics. Topics such as education, agriculture, climate, and business. Since these have become available the government was and still is faced with the challenge of making the datasets readily available in format that is compatible with major platforms and applications. In order to this the government chose open source applications to help present and store the datasets. 
+	Furthermore, a schema was created to standardize the way entire datasets, its resources, and its individual data elements were stored. This was done to allow the consumers of the data to be able to correctly and effectively access the data. In addition, the schema makes the exchange of the data between platforms easy as long as the given schema is followed. The government started with Schema v1.0 which utilized a JSON element to describe each individual data source. The fields in the JSON element were mostly well known keywords from DCAT. This was done to allow for interoperability by following existing open standards. 
+	In Schema v1.1 fields were added to describe individual data elements to allow consumers to further extract details on each data source. However, the major changes came in the form of adding field to describe the datasets and the resources used by the datasets. This change helps filter data points. In addition, it provides users more information which they can use to further compare and contrast data points, create applications, or simply recreate datasets using the provided distribution fields. In this paper I summarize the resources used for the Project Open Data, Schema v1.0, and Schema v1.2. 
+BACKGROUND:
+	The open data initiative is an effort by the United States government to provide transparency across all their agencies. In order to achieve this they have and will continue to make available multiple datasets across many disciplines. Making this data available allows developers and researchers to develop web and mobile applications, to design data visualization tools, and to conduct research as they see fit.
+The United States government publishes their data on their open data website with the URL of http://www.Data.gov. On this website they have over 129,950 datasets as of April 26, 2015. The datasets are spread across fourteen different topics. Those topics are the following:
+			1. Agriculture		8. Finance
+			2. Business		9. Health
+			3. Climate		10. Local Government
+			4. Consumer		11. Manufacturing
+			5. Ecosystems	12. Ocean
+			6. Education		13. Public Safety
+			7. Energy		14. Science & Research
+As shown in the list above the open data initiative provides data on a broad range of topics that aid in the development of new tools as well as providing learning opportunities via research.
+METHODS:
+	The government maintains a github site that contains source code, known bugs, and fixes. In addition, it contains general information describing the open source tools that are being used to power their databases and websites. The URL for the website is https://www.github.com/GSA/data.gov. 
+	The open data initiative utilizes two major open source applications for the presentation and availability of the data sets. The content on the Data.gov website is formatted and published using WordPress. The datasets that can be found at https://www.catalog.data.gov/dataset are using CKAN. CKAN stores metadata about the data and then presents it via a web interface. CKAN uses python on the backend and JavaScript on the front end. The database engine for CKAN is PostgreSQL.
+	With all the data available the problem of how to store and present it was made clear. In order to standardize the way the data was presented the government implemented a schema. The schema implemented by the government allowed the interoperability of data across all platforms by formatting JSON elements. Therefore, any application would be able to access and reconstruct the data by simply applying the schema to the JSON element retrieved. Lastly, in order to make the schema robust and compatible with existing open standards the majority of the JSON keywords came from the DCAT standard. There were a few exceptions and those are discussed in the sections below.
+RESULTS:
+	Having an efficient and well performing schema is a hard to accomplish. For this reason I will describe the original schema from 2013 and the new schema as of February 1, 2015. This allows one to see where the government is going in trying to land on an optimal schema to present all their data.
+
+Project Open Data Schema v1.0:
+	Schema v1.0 was finalized on 09/20/2013 and can be found at https://www.project-open-data.cio.gov/schema. The schema is based on metadata. Metadata is information that describes a data resource. The metadata associated with that data resource can be general or it can be very specific. For example if a human male was the data resource a general metadata element used to describe him could contain only a gender field. This was the consumer of the data knows that the data element is a male. On the other hand the metadata element could be more specific containing field that would completely described the human male. This way the consumer of the data would have a more specific idea of the human male. This same concept is the challenge when trying to standardize a way in which data is stored. 
+	The government chose to use JSON as its metadata file format. JSON is a data-exchange format that is based on a subset of JavaScript. A JSON element is a text format element which includes a dictionary of key-value pairs used to describe the data source. Each key is the field and the value is the value of that specific field. The schema is case sensitive. This means that the field of each JSON element must follow a certain convention for naming the fields. The schema requires that only the first letter of all the words except the first one in a field be capitalized. For example if the field is “contact point” then the correct way to label the field in the JSON element is “contactPoint”.
+	In the Project Open Data schema there are required and optional fields. The required fields are referred to as the “common core” fields. Every JSON element must have these fields populated. Optional fields may be unpopulated but must be represented with a “null” value. The common core fields are shown in the table below.
+Table 1: Common Core Fields (https://www.project-open-data.cio.gov/schema)
+ 
+	Next, there are fields that must be filled out if they apply. For example the fields United States Federal Agencies have to fill out the “bureauCode” and “programCode” fields. The table showing these fields is shown below.
+Table 2: Core - If Applicable Fields (https://www.project-open-data.cio.gov/schema)
+ 
+	Lastly, there are fields that can be expanded by agencies as they see fit. The only requirement is that the fields be from any well-known vocabularies shown at https://www.Vocab.Data.gov.
+	As explained before the schema uses key names directly from DCAT. There are a few exceptions and some key words were added to add functionality to the description of the datasets. The added keywords are listed below.
+1.	accessLevel
+2.	accessURL
+3.	accessLevelComment
+4.	SystemOfRecords
+5.	 bureauCode
+6.	programCode
+7.	dataQuality
+Project Open Data Schema v1.1:
+	As the amount of data and the different types of consumers grew the need for a new schema arose. The previous schema was not detailed enough and needed to be refined to make data more easily identifiable and therefore, searchable. Schema v1.1 replaced Schema v1.0 on February 1, 2015. It can be found at https://www.project-open-data.cio.gov/v1.1/schema.
+	For Schema v1.1 the government chose to stay with JSON as its metadata file format. Similar to Schema v1.0 the JSON element has required and optional fields that are case sensitive. Required fields must be populated while optional fields don’t have to be populated. However, unpopulated fields must contain “null” and can’t have an empty string.
+	In addition, Schema v1.1 introduces a couple of more rules and keywords to the metadata format. The first rule is that when a record has an “accessURL” or “downladURL” they need to be objects that are part of a “distribution”. Furthermore, any object that has a “downloadURL” must also have a “mediaType”. In Schema v1.1 the way to describe objects is standardized. An object can be described as a “mediaType” or it can be described with the “title”, “description”, and “format” fields.
+	The way the fields for the JSON element are divided is different in Schema v1.1. In Schema v1.0 the fields were divided into “Common Core”, “Common Core – If Applicable”, and “Expanded Fields (optional fields)”. In Schema v1.1 those fields are all gone and are replaced by “Catalog Fields”, “Dataset Fields” and “Distribution Field”. The default JSON element schema can be found at https://project-open-data.cio.gov/v1.1/schema/catalog.json and is shown below.
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://project-open-data.cio.gov/v1.1/schema/catalog.json#",
+  "title": "Project Open Data Catalog",
+  "description": "Validates an entire collection of Project Open Data metadata JSON    objects. Agencies produce said collections in the form of Data.json files.",
+  "type": "object",
+  "dependencies": {
+    "@type": [
+      "@context"
+    ]
+  },
+  "required": [
+    "conformsTo",
+    "dataset"
+  ],
+  "properties": {
+    "@context": {
+      "title": "Metadata Context",
+      "description": "URL or JSON object for the JSON-LD Context that defines the schema used",
+      "type": "string",
+      "format": "uri"
+    },
+    "@id": {
+      "title": "Metadata Catalog ID",
+      "description": "IRI for the JSON-LD Node Identifier of the Catalog. This should be the URL of the data.json file itself.",
+      "type": "string",
+      "format": "uri"
+    },
+    "@type": {
+      "title": "Metadata Context",
+      "description": "IRI for the JSON-LD data type. This should be dcat:Catalog for the Catalog",
+      "enum": [
+        "dcat:Catalog"
+      ]
+    },
+    "conformsTo": {
+      "description": "Version of Schema",
+      "title": "Version of Schema",
+      "enum": [
+        "https://project-open-data.cio.gov/v1.1/schema"
+      ]
+    },
+    "describedBy": {
+      "description": "URL for the JSON Schema file that defines the schema used",
+      "title": "Data Dictionary",
+      "type": "string",
+      "format": "uri"
+    },
+    "dataset": {
+      "type": "array",
+      "items": {
+        "$ref": "dataset.json",
+        "minItems": 1,
+        "uniqueItems": true
+      }
+    }
+  }
+}
+
+	The “Catalog Fields” describe the data file. These fields allow the consumer to distinguish between different datasets and allow them to identify the JSON element schema used if the default was not used. These fields are described in the table below.
+
+
+Table 3: Catalog Fields (https://www.project-open-data.cio.gov/v1.1/schema)
+ 
+	The “Dataset Fields” describe an attribute or feature of the data source element. These fields allow the consumer to compare and contrast each individual data point. These fields are shown in the table below.
+Table 4: Dataset Fields (https://www.project-open-data.cio.gov/v1.1/schema)
+ 
+ 
+ 	
+
+
+
+
+
+
+	Lastly, “Distribution Fields” are fields within a dataset that help summarize and combined the dataset’s resources. These fields are listed in the table below.
+
+Table 5: Distribution Fields (https://www.project-open-data.cio.gov/v1.1/schema)
+ 
+	
+	The schema uses key names directly from DCAT. There are a few exceptions and some key words were added to add functionality to the description of the datasets. However, most of the added keywords were already added in Schema v1.0. Only one new keyword not found in DCAT was introduced. That was the “rights” keyword.
+
+
+
+
+
+
+DISCUSSION:
+	With Schema v1.1 the government has expanded the way they share their datasets. The main change from Schema v1.0 and Schema v1.1 was the focus on the dataset as a whole rather than the individual data source. In the new Schema fields were created to allow the consumer to filter and search for data based on dataset attributes. This was not available before as the previous schema online provided a standard on how to format a JSON element for each individual data point. Now, however, Schema v1.1 provides the consumer flexibility and more information on the actual dataset as a whole. This allows the consumer an ease-of-use as they can easily decipher which JSON element schema is being used. This way data can be accessed and analyzed across all platforms. Furthermore, Schema v1.1 adds a lot more field s used to describe each individual data point. This once again allows the consumer of the data to be able to filter and extensively compare and contrast each data element. In addition, the implementation of the distribution fields provides a way for the consumer to reconstruct the dataset. This is because all the resources used by the data source are provided in an easily accessible JSON element. This way the consumer has the ability to access these resources and use them as they see fit.
+	In the future, the government will continue expanding and making the Project Open Data Schema more robust. They will continue to utilize JSON as it is such a lightweight and widely used metadata format. The future work lies in adding new fields to further provide more information about the data sources. In addition, as more data gets collected being able to divide and subdivide datasets will be important. This is because consumers should be able to utilize the given schema to find data sources that meet their criteria without having to download or search through the entire dataset, since these can be huge.
+CONCLUSION:
+	In conclusion, the Open Data Schema v1.1 is more robust than Schema v1.0. Based on the changes made in the later version it can be concluded that the changes were made in order to allow the consumer to more easily access and rebuild specific datasets. The government has ensured to use open source applications and standards to secure interoperability across major platforms and applications already established. For example, the have always used DCAT keywords along with other well-known vocabularies to allow consumers to quickly access the JSON elements from the datasets without major changes to their software. 
+
+
+
+
+
+
+
+
+
+
+
+REFERENCES:
+"About CKAN." Ckan Developers. N.p., n.d. Web. 28 Apr. 2015. <http://ckan.org/developers/about-ckan/>.
+"Common Core Metadata Schema V1.0." - Project Open Data. N.p., n.d. Web. 28 Apr. 2015. <https://project-open-data.cio.gov/schema/>.
+"Data Catalog." Search for a Dataset. N.p., n.d. Web. 28 Apr. 2015. <http://catalog.data.gov/dataset>.
+"Data Catalog Vocabulary (DCAT)." Data Catalog Vocabulary (DCAT). N.p., 16 Jan. 2014. Web. 28 Apr. 2015. <http://www.w3.org/TR/vocab-dcat/#basic-example>.
+"Developers - Data.gov." Datagov. N.p., n.d. Web. 28 Apr. 2015. <http://www.data.gov/developers/>.
+"GSA/data.gov." GitHub. N.p., n.d. Web. 28 Apr. 2015. <https://github.com/GSA/data.gov>.
+"Open Government Initiative." The White House. The White House, n.d. Web. 28 Apr. 2015. <https://www.whitehouse.gov/open>.
+"Project Open Data Metadata Schema V1.1." - Project Open Data. N.p., n.d. Web. 28 Apr. 2015. <https://project-open-data.cio.gov/v1.1/schema/>.
+"Schema.org." Home. N.p., n.d. Web. 28 Apr. 2015. <http://schema.org/>.
+"Vocab Data." Data.gov Vocabularies. N.p., n.d. Web. 28 Apr. 2015. <http://vocab.data.gov/>.
+
